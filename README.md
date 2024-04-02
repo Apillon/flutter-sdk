@@ -12,7 +12,7 @@ This package provides Dart and Flutter developers with tools and libraries to in
 
 To use the Apillon Flutter SDK, you must first register an account at [Apillon.io](https://app.apillon.io), create a project, and generate an API key with the appropriate permissions.
 
-The Flutter SDK package is available as a Dart package on [pub.dev](https://pub.dev/publishers/apillon.io/) and you can also check it out directly on [GitHub](https://github.com/Apillon/flutter-sdk).
+The Flutter SDK package is available as a Dart package on [pub.dev](https://pub.dev/packages/apillon_flutter) and you can also check it out directly on [GitHub](https://github.com/Apillon/flutter-sdk).
 To include it in your project, add the following to your `pubspec.yaml` file:
 
 ```yaml
