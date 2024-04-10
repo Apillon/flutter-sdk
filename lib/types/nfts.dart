@@ -14,6 +14,18 @@ enum EvmChain {
   }
 }
 
+enum SubstrateChain {
+  astar(8);
+
+  const SubstrateChain(this.value);
+
+  final num value;
+
+  static SubstrateChain getByValue(num i) {
+    return SubstrateChain.values.firstWhere((x) => x.value == i);
+  }
+}
+
 enum CollectionStatus {
   created(0),
   deployInitiated(1),
@@ -127,6 +139,56 @@ class ICreateCollection {
       "collectionType": collectionType1?.value,
       "chain": chain1?.value,
       "isAutoIncrement": isAutoIncrement ?? true,
+      "dropPrice": dropPrice,
+      "dropStart": dropStart,
+      "dropReserve":dropReserve,
+    };
+  }
+}
+
+class ICreateSubstrateCollection {
+  CollectionType? collectionType1;
+  SubstrateChain? chain1;
+  String name;
+  String symbol;
+  String? description;
+  String baseUri;
+  String baseExtension;
+  int? maxSupply;
+  String royaltiesAddress;
+  int royaltiesFees;
+  bool drop;
+  int? dropStart;
+  int? dropPrice;
+  int? dropReserve;
+
+  ICreateSubstrateCollection(
+      {required this.name,
+      required this.symbol,
+      required this.baseUri,
+      required this.baseExtension,
+      required this.royaltiesAddress,
+      required this.royaltiesFees,
+      required this.drop,
+      this.maxSupply,
+      this.description,
+      this.collectionType1,
+      this.chain1,
+      });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "symbol": symbol,
+      "baseUri": baseUri,
+      "baseExtension": baseExtension,
+      "royaltiesAddress": royaltiesAddress,
+      "royaltiesFees": royaltiesFees,
+      "drop": drop,
+      "maxSupply": maxSupply,
+      "description": description,
+      "collectionType": collectionType1?.value,
+      "chain": chain1?.value,
       "dropPrice": dropPrice,
       "dropStart": dropStart,
       "dropReserve":dropReserve,
