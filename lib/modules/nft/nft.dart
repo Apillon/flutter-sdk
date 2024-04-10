@@ -43,7 +43,22 @@ class Nft extends ApillonModule {
       data.dropStart = data.dropPrice = data.dropReserve = 0;
     }
     final response = await ApillonApi.post<ICollection>(
-        apiPrefix, data.toJson(),
+        '$apiPrefix/evm', data.toJson(),
+        mapper: ICollection.fromJson);
+
+    return NftCollection(response.collectionUuid, response.toJson());
+  }
+
+  /// Deploys a new Substrate NftCollection smart contract.
+  /// @param data NFT collection data.
+  /// @returns A NftCollection instance.
+  Future<NftCollection> createSubstrate(ICreateSubstrateCollection data) async {
+  // If not drop, set drop properties to default 0
+    if (!data.drop) {
+      data.dropStart = data.dropPrice = data.dropReserve = 0;
+    }
+    final response = await ApillonApi.post<ICollection>(
+        '$apiPrefix/substrate', data.toJson(),
         mapper: ICollection.fromJson);
 
     return NftCollection(response.collectionUuid, response.toJson());

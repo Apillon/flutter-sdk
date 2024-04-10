@@ -11,7 +11,7 @@ class Storage extends ApillonModule {
   Storage(super.config);
 
   /// Lists all buckets.
-  /// @param {ICollectionFilters} params Filter for listing collections.
+  /// @param {IApillonPagination} params Filter for listing buckets.
   /// @returns Array of StorageBucket objects.
   Future<IApillonList<StorageBucket>> listBuckets(
       IApillonPagination? params) async {

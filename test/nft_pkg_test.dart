@@ -19,21 +19,6 @@ final nftData = ICreateCollection(
   isSoulbound: false,
   drop: false,
 );
-final nftData1 = ICreateCollection(
-    chain1: EvmChain.moonbase,
-    collectionType1: CollectionType.generic,
-    description: 'Created from SDK tests',
-    symbol: 'SDKT',
-    royaltiesFees: 0,
-    royaltiesAddress: '0x0000000000000000000000000000000000000000',
-    baseUri: 'https://test.com/metadata/',
-    baseExtension: '.json',
-    maxSupply: 5,
-    isRevokable: false,
-    isSoulbound: false,
-    drop: false,
-    name: 'SDK Test isAutoIncrement=false',
-    isAutoIncrement: false);
 
 void main() {
   late Nft nft;
@@ -75,6 +60,31 @@ void main() {
       createdCollectionUuid = collection.uuid;
     });
 
+    test('creates a new substrate collection', () async {
+      final substrateData = ICreateSubstrateCollection(
+      chain1: SubstrateChain.astar,
+      collectionType1: CollectionType.generic,
+      name: 'SDK Test Substrate',
+      description: 'Created from SDK tests',
+      symbol: 'SDKTS',
+      royaltiesFees: 0,
+      royaltiesAddress: 'b3k5JvUnYjdZrCCNkf15PFpqChMunu11aeRoLropayUmhR4',
+      baseUri: 'https://test.com/metadata/',
+      baseExtension: '.json',
+      maxSupply: 5,
+      drop: false,
+      );
+      final collection = await nft.createSubstrate(substrateData);
+      expect(collection.uuid, isNotNull);
+      expect(collection.contractAddress, isNotNull);
+      expect(collection.symbol, 'SDKT');
+      expect(collection.name, 'SDK Test');
+      expect(collection.description, 'Created from SDK tests');
+      expect(collection.isAutoIncrement, isTrue);
+      expect(collection.isRevokable, isFalse);
+      expect(collection.isSoulbound, isFalse);
+    });
+
     test('get nft collection transactions', () async {
       final transactions =
           (await nft.collection(collectionUuid).listTransactions(null)).items;
@@ -110,7 +120,7 @@ void main() {
 
   group('NFT with custom IDs mint', () {
     test('creates a new collection', () async {
-      final collection = await nft.create(nftData1);
+      final collection = await nft.create(nftData);
       expect(collection.uuid, isNotNull);
       expect(collection.contractAddress, isNotNull);
       expect(collection.symbol, 'SDKT');

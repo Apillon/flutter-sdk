@@ -1,3 +1,5 @@
 ## 0.0.1
+- [Added] Storage, NFT and Identity Module built with Flutter
 
-* TODO: Describe initial release.
+## 0.1.0
+- [Added] support for creating Substrate NFTs
